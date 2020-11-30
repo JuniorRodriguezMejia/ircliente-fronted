@@ -1,0 +1,109 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-center">Lista de Clientes</h4>
+        <h6 class="text-right">
+            Promedio: <span class="badge badge-pill badge-success">{{avg}}</span>
+            Desv. Estándar: <span class="badge badge-pill badge-danger">{{stdDev}}</span>
+        </h6> 
+                  
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha Nac.</th>
+                    <th>Edad</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customerList">
+                    <td>{{customer.firstname}}</td>
+                    <td>{{customer.lastname}}</td>
+                    <td>{{customer.birthday}}</td>
+                    <td>{{customer.age}}</td>
+                    <td>
+                        <a class="btn btn-warning text-white" data-toggle="modal" data-target="#viewCustomerModal"  (click)="onViewCustomer(customer)">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="viewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewCustomerModalLabel">Proyección de Cliente</h5>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" 
+                    name="$key"
+                    #$key="ngModel"
+                    [(ngModel)]="customerService.selectedCustomer.$key"
+                >
+                <div class="form-group">
+                    <label for="firstname">Nombre</label>
+                    <input type="text" 
+                        class="form-control" 
+                        disabled
+                        name="firstname"
+                        id="firstname"
+                        #firstname="ngModel"
+                        [(ngModel)]="customerService.selectedCustomer.firstname"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Apellido</label>
+                    <input type="text" 
+                        class="form-control" 
+                        disabled
+                        name="lastname"
+                        id="lastname"
+                        #lastname="ngModel"
+                        [(ngModel)]="customerService.selectedCustomer.lastname"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Fecha de Nacimiento</label>
+                    <input type="text" 
+                        class="form-control" 
+                        disabled
+                        name="birthday"
+                        id="birthday"
+                        #birthday="ngModel"
+                        [(ngModel)]="customerService.selectedCustomer.birthday"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="age">Edad</label>
+                    <input type="text" 
+                        class="form-control" 
+                        disabled
+                        name="age"
+                        id="age"
+                        #age="ngModel"
+                        [(ngModel)]="customerService.selectedCustomer.age"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="deathday">Fecha probable de Muerte</label>
+                    <input type="text" 
+                        class="form-control" 
+                        disabled
+                        name="deathday"
+                        id="deathday"
+                        #deathday="ngModel"
+                        [(ngModel)]="customerService.selectedCustomer.deathday"
+                    >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #btnClose class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div> 
